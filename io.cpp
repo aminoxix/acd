@@ -225,6 +225,61 @@ using namespace std;
 //     return counter;
 // }
 
+// void binarySearch(vector<int> arr, int n) {
+//     int mid;
+//     int temp = 0; // low
+//     int size = arr.size(); // high
+
+//     do {
+//         mid = (temp + size) / 2;
+//         if (n == arr[mid]) {
+//             cout << "mid: " << mid;
+//             break;
+//         } else if (n < arr[mid]) {
+//             size = mid - 1; // shrink to left
+//         } else {
+//             temp = mid + 1; // shrink to right
+//         }
+//     } while (temp <= size);
+// }
+
+// int reverseNumber(int n) {
+//     int reversed = 0;
+//     int quo, rem;
+//     quo = n;
+
+//     while (quo != 0) {
+//         rem = quo % 10;
+
+//         // leetcode to handle overflow & underflow, in case 0, it's answer could be in long (out of the ctx)
+//         if ((reversed > INT_MAX / 10) || (reversed < INT_MIN / 10)) {
+//             return 0; // Return 0 if reversing x would cause overflow/underflow
+//         }
+
+//         reversed = reversed * 10 + rem;
+//         quo = quo / 10;
+//     }
+//     return reversed;
+// }
+
+// bool isPalindrome(int x) {
+//     if (x < 0) {
+//         return 0;
+//     }
+//     int reversed = 0;
+//     for (int quo = x; quo != 0; quo /= 10){
+//         int rem = quo % 10;
+//         if ((reversed > INT_MAX / 10 || (reversed == INT_MAX / 10 && rem > 7)) || (reversed < INT_MIN / 10) || (reversed == INT_MIN / 10 && rem < -8)) return 0;
+//         reversed = reversed * 10 + rem;
+//     }
+//     return reversed == x;
+// }
+
+int findGCD(int n, int m) {
+
+}
+
+
 int main() {
     // int x;
     // cin >> x;
@@ -245,6 +300,16 @@ int main() {
     // // counter
     // int numbers = countDigits(12347678);
     // cout << "number of numbers: " << numbers;
+
+    // vector<int> arr = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11};
+    // binarySearch(arr, 11);
+
+    int n = 10;
+    int m = 15;
+
+    int test = findGCD(n, m);
+    cout << "test: " << test;
+    // reverseNumber(n);
     return 0;
 }
 
