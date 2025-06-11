@@ -276,7 +276,24 @@ using namespace std;
 // }
 
 int findGCD(int n, int m) {
+    int largest = 1;
+    int x = n, y = m;
+    vector<int> temp = {};
+    vector<int> divisor = {2, 3, 5, 7};
 
+    for (int i = 0; i < divisor.size(); i++) {
+        while (x % divisor[i] == 0 && y % divisor[i] == 0) {
+            x /= divisor[i];
+            y /= divisor[i];
+            temp.push_back(divisor[i]);
+        }
+    }
+
+    for (int i = 0; i < temp.size(); i++) {
+        largest *= temp[i];
+    }
+
+    return largest;
 }
 
 
@@ -303,13 +320,13 @@ int main() {
 
     // vector<int> arr = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11};
     // binarySearch(arr, 11);
-
-    int n = 10;
-    int m = 15;
-
-    int test = findGCD(n, m);
-    cout << "test: " << test;
     // reverseNumber(n);
+
+    int n = 24;
+    int m = 30;
+
+    int result = findGCD(n, m);
+    cout << "result: " << result;
     return 0;
 }
 
