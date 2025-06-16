@@ -275,25 +275,41 @@ using namespace std;
 //     return reversed == x;
 // }
 
-int findGCD(int n, int m) {
-    int largest = 1;
-    int x = n, y = m;
-    vector<int> temp = {};
-    vector<int> divisor = {2, 3, 5, 7};
+// int findGCD(int n, int m) {
+//     int largest = 1;
+//     int x = n, y = m;
+//     vector<int> temp = {};
+//     vector<int> divisor = {2, 3, 5, 7};
 
-    for (int i = 0; i < divisor.size(); i++) {
-        while (x % divisor[i] == 0 && y % divisor[i] == 0) {
-            x /= divisor[i];
-            y /= divisor[i];
-            temp.push_back(divisor[i]);
-        }
-    }
+//     for (int i = 0; i < divisor.size(); i++) {
+//         while (x % divisor[i] == 0 && y % divisor[i] == 0) {
+//             x /= divisor[i];
+//             y /= divisor[i];
+//             temp.push_back(divisor[i]);
+//         }
+//     }
 
-    for (int i = 0; i < temp.size(); i++) {
-        largest *= temp[i];
-    }
+//     for (int i = 0; i < temp.size(); i++) {
+//         largest *= temp[i];
+//     }
 
-    return largest;
+//     return largest;
+// }
+
+// bool containsDuplicate(vector<int>& nums) {
+//     unordered_set<int> seen;
+//     for (int num : nums) {
+//         if (seen.count(num)) {
+//             return true;
+//         }
+//         seen.insert(num);
+//     }
+//     return false;
+// }
+
+
+bool isArmstrongNumber(int n) {
+    
 }
 
 
@@ -318,14 +334,16 @@ int main() {
     // int numbers = countDigits(12347678);
     // cout << "number of numbers: " << numbers;
 
-    // vector<int> arr = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11};
+    vector<int> arr = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11};
     // binarySearch(arr, 11);
     // reverseNumber(n);
 
-    int n = 24;
-    int m = 30;
+    int n = 153;
+    // int m = 30;
 
-    int result = findGCD(n, m);
+    // isArmstrongNumber(n);
+    // bool result = containsDuplicate(arr);
+    int result = isArmstrongNumber(153);
     cout << "result: " << result;
     return 0;
 }
