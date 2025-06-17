@@ -1,1 +1,10 @@
+trying power -> 1 result: 14
+trying power -> 2 result: 36
+trying power -> 3 result: 98
+trying power -> 4 result: 276
+trying power -> 5 result: 794
+trying power -> 6 result: 2316
+trying power -> 7 result: 6818
+trying power -> 8 result: 20196
+trying power -> 9 result: 60074
 result: 0
