@@ -308,27 +308,55 @@ using namespace std;
 // }
 
 
-bool isArmstrongNumber(int n) {
-    int count = 0;
+// bool isArmstrongNumber(int n) {
+//     int count = 0;
 
-    vector<int> reversed;
-    int quo, rem;
-    quo = n;
-    while (quo != 0) {
-        rem = quo % 10;
-        count++;
-        reversed.push_back(rem);
-        quo = quo / 10;
-    }
+//     vector<int> reversed;
+//     int quo, rem;
+//     quo = n;
+//     while (quo != 0) {
+//         rem = quo % 10;
+//         count++;
+//         reversed.push_back(rem);
+//         quo = quo / 10;
+//     }
 
-    int result = 0;
-    for (int n : reversed) {
-        result += pow(n, count);
-    }
+//     int result = 0;
+//     for (int n : reversed) {
+//         result += pow(n, count);
+//     }
 
-    return result == n;
+//     return result == n;
+// }
+
+
+// recursion
+// // option 1:
+// void recursivelyPrint(int n, int sum) {
+//     if (n < 1) {
+//         cout << "sum: " << sum << "\n"; 
+//         return;
+//     }
+
+//     sum += n;
+//     n--;
+//     recursivelyPrint(n, sum); 
+// }
+
+// // option 2:
+// int recursivelyPrint(int n, int sum) {
+//     if (n < 1) return sum;
+
+//     sum += n;
+//     n--;
+//     recursivelyPrint(n, sum); 
+// }
+
+// option 3:
+int recursivelyPrint(int n) {
+    if (n < 1) return 0;
+    return n + recursivelyPrint(n - 1);
 }
-
 
 int main() {
     // int x;
@@ -360,8 +388,10 @@ int main() {
 
     // isArmstrongNumber(n);
     // bool result = containsDuplicate(arr);
-    auto result = isArmstrongNumber(n);
+    
+    int result = recursivelyPrint(3);
     cout << "result: " << result;
+
     return 0;
 }
 

@@ -43,6 +43,8 @@
     "ratio": "cpp",
     "unordered_map": "cpp",
     "vector": "cpp",
-    "compilerPath": "/usr/bin/g++"
+    "compilerPath": "/usr/bin/g++",
+    "chrono": "cpp",
+    "functional": "cpp"
   }
 }
