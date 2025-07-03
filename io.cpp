@@ -308,30 +308,25 @@ using namespace std;
 // }
 
 
-auto isArmstrongNumber(int n) {
-    auto result = 0;
-    vector<int> powers = {1,2,3,4,5,6,7,8,9,10};
-    vector<int> reversed = {};
+bool isArmstrongNumber(int n) {
+    int count = 0;
 
+    vector<int> reversed;
     int quo, rem;
     quo = n;
-    while(quo != 0) {
+    while (quo != 0) {
         rem = quo % 10;
+        count++;
         reversed.push_back(rem);
-        quo /= 10;
+        quo = quo / 10;
     }
-    for (int i = 1; i < powers.size(); i++) {
-        result = 0;
-        for (const auto& num : reversed) {
-            auto temp = pow(num, powers[i]);
-            result += temp;
-        }
-        cout << "trying power -> " << i << " result: " << result << "\n";
-        if (result == n) {
-            return 1;
-        }
+
+    int result = 0;
+    for (int n : reversed) {
+        result += pow(n, count);
     }
-    return 0;
+
+    return result == n;
 }
 
 
@@ -360,7 +355,7 @@ int main() {
     // binarySearch(arr, 11);
     // reverseNumber(n);
 
-    int n = 123;
+    int n = 1634;
     // int m = 30;
 
     // isArmstrongNumber(n);
