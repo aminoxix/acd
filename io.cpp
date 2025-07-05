@@ -355,7 +355,97 @@ using namespace std;
 // option 3:
 int recursivelyPrint(int n) {
     if (n < 1) return 0;
+    // if (n < 1) return 1; // factorial
     return n + recursivelyPrint(n - 1);
+    // return n * recursivelyPrint(n - 1); // factorial
+}
+
+void lengthOfAnything(int n) {
+    cout << "length: " << to_string(n).length() << "\n";
+}
+
+// void printDivisors(int n) {
+//     vector<int> divisors = {};
+//     for (int i = 1; i <= sqrt(n); i++) {
+//         if (n % i == 0) {
+//             divisors.push_back(i);
+//             cout << "i: " << i << "\n";
+
+//             if (i != n / i) {
+//                 divisors.push_back(n / i);
+//                 cout << "i: " << n / i << "\n";
+//             }
+//         }
+//     }
+// }
+
+// bool isPrimeNumber(int n) {
+//     vector <int> divisors = {};
+//     for (int i = 1; i <= sqrt(n); i++) {
+//         if (n % i == 0) {
+//             divisors.push_back(i);
+//             if (i != n / i) {
+//                 divisors.push_back(n / i);
+//             }
+//         }
+//     }
+
+//     if (divisors.size() == 2) {
+//         return 1;
+//     } else return 0;
+// }
+
+// leetcode
+// int fib(int n) {
+//     if (n <= 1) return n;
+//     return fib(n - 1) + fib(n - 2);
+// }
+
+// vector<int> recursionReverseArray(vector<int> arr) {
+//     static int i = 0;
+//     int n = arr.size();
+
+//     if (i >= n - i - 1) return arr;
+
+//     swap(arr[i], arr[n - i - 1]);
+//     i++;
+
+//     return recursionReverseArray(arr);
+// }
+
+// bool isPalindrome(int n) {
+//     static int reversed = 0;
+//     static int i = 0;
+//     int size = to_string(n).length();
+
+//     int rem;
+//     if (n != 0) {
+//         rem = n % 10;
+//         reversed = reversed * 10 + rem;
+//         isPalindrome(n / 10);
+//     }
+
+//     return reversed == n;
+// }
+
+// recursive palindrome check
+string getCleanString(string s) {
+    static string cleaned = "";
+    for (char c : s) {
+        if (isalnum(c)) {
+            cleaned += tolower(c);
+        }
+    }
+    return cleaned;
+}
+bool isPalindrome(string n, int i) {
+    static string cleaned = getCleanString(n);
+    int size = cleaned.size();
+
+    if (i >= size / 2) return true;
+    if (cleaned[i] != cleaned[size - i - 1]) return false;
+    return isPalindrome(cleaned, i + 1);
+
 }
 
 int main() {
@@ -383,16 +473,28 @@ int main() {
     // binarySearch(arr, 11);
     // reverseNumber(n);
 
-    int n = 1634;
+    int n = 16;
     // int m = 30;
 
     // isArmstrongNumber(n);
     // bool result = containsDuplicate(arr);
     
-    int result = recursivelyPrint(3);
-    cout << "result: " << result;
+    // int result = recursivelyPrint(4);
+    
+    // lengthOfAnything(n);
+    
+    // printDivisors(n);
+    // auto result = isPrimeNumber(5);
+    
+    // int result = fib(3);
+
+    // auto result = recursionReverseArray(arr);
+    bool result = isPalindrome("abcba", 0);
+
+    // for (int n : result) {
+    //     cout << n << " ";
+    // }
+    cout << "result: " << result << "\n";
 
     return 0;
 }
-
-
