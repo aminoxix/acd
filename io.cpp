@@ -445,8 +445,61 @@ bool isPalindrome(string n, int i) {
     if (i >= size / 2) return true;
     if (cleaned[i] != cleaned[size - i - 1]) return false;
     return isPalindrome(cleaned, i + 1);
-
 }
+
+// int maxFrequency(vector<int> nums, int k) {
+//     sort(nums.begin(), nums.end());
+//     int maxFreq = 1;
+
+//     for (int i = nums.size() - 1; i >= 0; i--) {
+//         int current = nums[i];
+//         int currFreq = 1;
+//         long long operations = k;
+
+//         for (int j = i - 1; j >= 0; j--) {
+
+//             long long diff = current - nums[j];
+//             if (operations >= diff) {
+//                 operations -= diff;
+//                 currFreq++;
+//             } else break;
+//         }
+
+//         maxFreq = max(maxFreq, currFreq);
+//     }
+
+//     return maxFreq;
+// }
+
+/* sliding window */
+int maxFrequency(vector<int> arr, int k) {
+    sort(arr.begin(), arr.end());
+
+    int right = 0, left = 0, result = 0;
+    long long total = 0;
+
+    // iterate thru all elements
+    while (right < arr.size()) {
+        total += arr[right];
+
+        /*
+        condition:
+            expand while (right * window length) < k + total; 
+            else increase left position by 1 & decrease its value from total
+        */ 
+        while (1LL * arr[right] * (right - left + 1) > k + total) {
+            total -= arr[left];
+            left += 1;
+        }
+
+        // get result by max from result i.e., initially 0 &, window length
+        result = max(result, right - left + 1);
+        right += 1;
+    }
+
+    return result;
+}
+
 
 int main() {
     // int x;
@@ -489,7 +542,14 @@ int main() {
     // int result = fib(3);
 
     // auto result = recursionReverseArray(arr);
-    bool result = isPalindrome("abcba", 0);
+    // bool result = isPalindrome("abcba", 0);
+
+    vector<int> array = { 1, 4, 13, 8 };
+    // vector<int> array = { 3, 9, 6 };
+    // vector<int> array = { 1, 2, 4 };
+    int result = maxFrequency(array, 5);
+    // vector<int> array = { 9930,9923,9983,9997,9934,9952,9945,9914,9985,9982,9970,9932,9985,9902,9975,9990,9922,9990,9994,9937,9996,9964,9943,9963,9911,9925,9935,9945,9933,9916,9930,9938,10000,9916,9911,9959,9957,9907,9913,9916,9993,9930,9975,9924,9988,9923,9910,9925,9977,9981,9927,9930,9927,9925,9923,9904,9928,9928,9986,9903,9985,9954,9938,9911,9952,9974,9926,9920,9972,9983,9973,9917,9995,9973,9977,9947,9936,9975,9954,9932,9964,9972,9935,9946,9966 };
+    // int result = maxFrequency(array, 3056);
 
     // for (int n : result) {
     //     cout << n << " ";
