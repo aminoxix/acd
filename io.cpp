@@ -548,6 +548,28 @@ int lengthOfLongestSubstring(string s) {
     return maxLength;
 }
 
+// find minimum through iteration & swap the value with the position
+void selection_sort(vector<int> arr) {
+    for (int i = 0; i <= arr.size() - 2; i++) {
+        for (int j = i; j <= arr.size() - 1; j++) {
+            if (arr[j] < arr[i]) {
+                // int temp = arr[j];
+                // arr[j] = arr[i];
+                // arr[i] = temp;
+
+                // without using third
+                arr[i] = arr[i] + arr[j];
+                arr[j] = arr[i] - arr[j];
+                arr[i] = arr[i] - arr[j];
+            }
+        }
+    }
+    
+    for (int it : arr) {
+        cout << it << endl; 
+    }
+}
+
 
 int main() {
     // int x;
@@ -599,12 +621,15 @@ int main() {
     // vector<int> array = { 9930,9923,9983,9997,9934,9952,9945,9914,9985,9982,9970,9932,9985,9902,9975,9990,9922,9990,9994,9937,9996,9964,9943,9963,9911,9925,9935,9945,9933,9916,9930,9938,10000,9916,9911,9959,9957,9907,9913,9916,9993,9930,9975,9924,9988,9923,9910,9925,9977,9981,9927,9930,9927,9925,9923,9904,9928,9928,9986,9903,9985,9954,9938,9911,9952,9974,9926,9920,9972,9983,9973,9917,9995,9973,9977,9947,9936,9975,9954,9932,9964,9972,9935,9946,9966 };
     // int result = maxFrequency(array, 3056);
     
-    int result = lengthOfLongestSubstring("abcabcbb");
+    // int result = lengthOfLongestSubstring("abcabcbb");
+    
+    vector<int> array1 = {11, 7, 3, 6, 9, 1, 5, 10, 2, 4, 8};
+    selection_sort(array1);
 
     // for (int n : result) {
     //     cout << n << " ";
     // }
-    cout << "result: " << result << "\n";
+    // cout << "result: " << result << "\n";
 
     return 0;
 }
