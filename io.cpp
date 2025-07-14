@@ -586,6 +586,22 @@ vector<int> bubble_sort(vector<int> arr) {
     return arr;
 }
 
+/*
+* traverse number to it's right position
+* best case: O(n)
+* worst case: O(n ^ 2) = n square 
+*/ 
+vector<int> insertion_sort(vector<int> arr) {
+    for (int i = 1; i <= arr.size() - 1; i++) {
+        for (int j = i; j > 0; j--) {
+            if (arr[j-1] > arr[j]) {
+                swap(arr[j], arr[j-1]);
+            }
+        }
+    }
+    return arr;
+}
+
 int main() {
     // int x;
     // cin >> x;
@@ -640,7 +656,8 @@ int main() {
     
     vector<int> array1 = {11, 7, 3, 6, 9, 1, 5, 10, 2, 4, 8};
     // vector<int> result = selection_sort(array1);
-    vector<int> result = bubble_sort(arr);
+    // vector<int> result = bubble_sort(arr);
+    vector<int> result = insertion_sort(array1);
 
     for (int n : result) {
         cout << n << " ";
