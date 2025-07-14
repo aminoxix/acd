@@ -549,7 +549,7 @@ int lengthOfLongestSubstring(string s) {
 }
 
 // find minimum through iteration & swap the value with the position
-void selection_sort(vector<int> arr) {
+vector<int> selection_sort(vector<int> arr) {
     for (int i = 0; i <= arr.size() - 2; i++) {
         for (int j = i; j <= arr.size() - 1; j++) {
             if (arr[j] < arr[i]) {
@@ -564,12 +564,21 @@ void selection_sort(vector<int> arr) {
             }
         }
     }
-    
-    for (int it : arr) {
-        cout << it << endl; 
-    }
+    return arr;
 }
 
+// start from comparing 2 numbers & swap
+vector<int> bubble_sort(vector<int> arr) {
+    for (int i = 0; i <= arr.size() - 2; i++) {
+        for (int j = arr.size() - 1; j > i; j--) {
+            if (arr[j] < arr[j - 1]) {
+                swap(arr[j], arr[j - 1]);
+            }
+        } 
+    }
+
+    return arr;
+}
 
 int main() {
     // int x;
@@ -624,11 +633,12 @@ int main() {
     // int result = lengthOfLongestSubstring("abcabcbb");
     
     vector<int> array1 = {11, 7, 3, 6, 9, 1, 5, 10, 2, 4, 8};
-    selection_sort(array1);
+    // vector<int> result = selection_sort(array1);
+    vector<int> result = bubble_sort(array1);
 
-    // for (int n : result) {
-    //     cout << n << " ";
-    // }
+    for (int n : result) {
+        cout << n << " ";
+    }
     // cout << "result: " << result << "\n";
 
     return 0;
