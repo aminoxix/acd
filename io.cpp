@@ -570,11 +570,17 @@ vector<int> selection_sort(vector<int> arr) {
 // start from comparing 2 numbers & swap
 vector<int> bubble_sort(vector<int> arr) {
     for (int i = 0; i <= arr.size() - 2; i++) {
+        // for optimisation
+        int didSwap = 0;
         for (int j = arr.size() - 1; j > i; j--) {
             if (arr[j] < arr[j - 1]) {
+                // if swap happens
+                didSwap = 1;
                 swap(arr[j], arr[j - 1]);
             }
-        } 
+        }
+        // if no swap happens, break out thru loop
+        if (didSwap == 0) cout << "time complexity is O(n) or linear\n"; break;
     }
 
     return arr;
@@ -634,7 +640,7 @@ int main() {
     
     vector<int> array1 = {11, 7, 3, 6, 9, 1, 5, 10, 2, 4, 8};
     // vector<int> result = selection_sort(array1);
-    vector<int> result = bubble_sort(array1);
+    vector<int> result = bubble_sort(arr);
 
     for (int n : result) {
         cout << n << " ";
