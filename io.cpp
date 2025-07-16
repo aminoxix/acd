@@ -602,6 +602,49 @@ vector<int> insertion_sort(vector<int> arr) {
     return arr;
 }
 
+vector<int> merge(vector<int>& arr, int left, int mid, int right) {
+    vector<int> temp = {};
+    int secondPointer = mid + 1;
+    int i = left;
+
+    while (left <= mid && secondPointer <= right) {
+        if (arr[left] < arr[secondPointer]) {
+            temp.push_back(arr[left]);
+            left++;
+        } else {
+            temp.push_back(arr[secondPointer]);
+            secondPointer++;
+        }
+    }
+
+    while (left <= mid) {
+        temp.push_back(arr[left]);
+        left++;
+    }
+
+    while (secondPointer <= right) {
+        temp.push_back(arr[secondPointer]);
+        secondPointer++;
+    }
+
+    // temp copy back to array
+    for (int j = 0; j < temp.size(); j++) {
+        arr[i + j] = temp[j];
+    }
+
+    return temp;
+}
+
+vector<int> merge_sort(vector<int>& arr, int low, int high) {
+    if (low == high) return {};
+
+    int mid = (low + high) / 2;
+    merge_sort(arr, low, mid);
+    merge_sort(arr, mid + 1, high);
+
+    return merge(arr, low, mid, high);
+}
+
 int main() {
     // int x;
     // cin >> x;
@@ -657,7 +700,8 @@ int main() {
     vector<int> array1 = {11, 7, 3, 6, 9, 1, 5, 10, 2, 4, 8};
     // vector<int> result = selection_sort(array1);
     // vector<int> result = bubble_sort(arr);
-    vector<int> result = insertion_sort(array1);
+    // vector<int> result = insertion_sort(array1);
+    vector<int> result = merge_sort(array1, 0, array1.size() - 1);
 
     for (int n : result) {
         cout << n << " ";
