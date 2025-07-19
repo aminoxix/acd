@@ -602,24 +602,24 @@ vector<int> insertion_sort(vector<int> arr) {
     return arr;
 }
 
-vector<int> merge(vector<int>& arr, int left, int mid, int right) {
+void merge(vector<int>& arr, int left, int mid, int right) {
     vector<int> temp = {};
+    int firstPointer = left;
     int secondPointer = mid + 1;
-    int i = left;
 
-    while (left <= mid && secondPointer <= right) {
-        if (arr[left] < arr[secondPointer]) {
-            temp.push_back(arr[left]);
-            left++;
+    while (firstPointer <= mid && secondPointer <= right) {
+        if (arr[firstPointer] < arr[secondPointer]) {
+            temp.push_back(arr[firstPointer]);
+            firstPointer++;
         } else {
             temp.push_back(arr[secondPointer]);
             secondPointer++;
         }
     }
 
-    while (left <= mid) {
-        temp.push_back(arr[left]);
-        left++;
+    while (firstPointer <= mid) {
+        temp.push_back(arr[firstPointer]);
+        firstPointer++;
     }
 
     while (secondPointer <= right) {
@@ -628,21 +628,50 @@ vector<int> merge(vector<int>& arr, int left, int mid, int right) {
     }
 
     // temp copy back to array
-    for (int j = 0; j < temp.size(); j++) {
-        arr[i + j] = temp[j];
+    for (int i = left; i <= right; i++) {
+        arr[i] = temp[i - left];
     }
-
-    return temp;
 }
-
-vector<int> merge_sort(vector<int>& arr, int low, int high) {
-    if (low == high) return {};
+void merge_sort(vector<int>& arr, int low, int high) {
+    if (low >= high) return;
 
     int mid = (low + high) / 2;
     merge_sort(arr, low, mid);
     merge_sort(arr, mid + 1, high);
 
-    return merge(arr, low, mid, high);
+    merge(arr, low, mid, high);
+}
+
+int partition(vector<int> &arr, int low, int high) {
+    int pivot = arr[low];
+    int i = low, j = high;
+
+    while (i < j) {
+        // traversing from left to the pivot
+        while (arr[i] <= pivot && i <= high - 1) {
+            i++;
+        }
+
+        // traversing from right to the pivot
+        while (arr[j] > pivot && j >= low + 1) {
+            j--;
+        }
+
+        // swap if NOT crosses
+        if (i < j) swap(arr[i], arr[j]);
+    }
+
+    // swap if crosses
+    swap(arr[low], arr[j]);
+    return j;
+}
+void quick_sort(vector<int> &arr, int low, int high) {
+    if (low < high) {
+        int partitionIndex = partition(arr, low, high);
+
+        quick_sort(arr, low, partitionIndex - 1);
+        quick_sort(arr, partitionIndex + 1, high);
+    }
 }
 
 int main() {
@@ -698,12 +727,15 @@ int main() {
     // int result = lengthOfLongestSubstring("abcabcbb");
     
     vector<int> array1 = {11, 7, 3, 6, 9, 1, 5, 10, 2, 4, 8};
+    // vector<int> array1 = {0};
     // vector<int> result = selection_sort(array1);
     // vector<int> result = bubble_sort(arr);
     // vector<int> result = insertion_sort(array1);
-    vector<int> result = merge_sort(array1, 0, array1.size() - 1);
+    // merge_sort(array1, 0, array1.size() - 1);
+    quick_sort(array1, 0, array1.size() - 1);
+    vector<int> result = array1;
 
-    for (int n : result) {
+    for (int n : array1) {
         cout << n << " ";
     }
     // cout << "result: " << result << "\n";
