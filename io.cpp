@@ -586,6 +586,18 @@ vector<int> bubble_sort(vector<int> arr) {
     return arr;
 }
 
+void recursive_bubble_sort(vector<int> &arr, int n) {
+    if (n == 1) return;
+
+    for (int j = 0; j <= n - 2; j++) {
+        if (arr[j] > arr[j + 1]) {
+            swap(arr[j], arr[j+1]);
+        }
+    }
+
+    recursive_bubble_sort(arr, n - 1);
+}
+
 /*
 * traverse number to it's right position
 * best case: O(n)
@@ -600,6 +612,25 @@ vector<int> insertion_sort(vector<int> arr) {
         }
     }
     return arr;
+}
+
+void recursive_insertion_sort(vector<int> &arr, int n) {
+    if (n <= 1) return;
+
+    // Sort first n-1 elements
+    recursive_insertion_sort(arr, n - 1);
+
+    // Insert last element at its correct position
+    int last = arr[n - 1];
+    int j = n - 2;
+
+    // Shift elements greater than last
+    while (j >= 0 && arr[j] > last) {
+        arr[j + 1] = arr[j];
+        j--;
+    }
+
+    arr[j + 1] = last;
 }
 
 void merge(vector<int>& arr, int left, int mid, int right) {
@@ -674,6 +705,55 @@ void quick_sort(vector<int> &arr, int low, int high) {
     }
 }
 
+// int merge(vector<int>& nums, int lower, int upper) {
+// // vector<int> countRangeSum(vector<int>& nums, int lower, int upper) {
+//     vector<int> temp = {};
+//     int firstPointer = lower;
+//     int mid = (lower + upper) / 2;
+//     int secondPointer = mid + 1;
+    
+//     while (firstPointer <= mid && secondPointer <= upper) {
+//         if (nums[firstPointer] < nums[secondPointer]) {
+//             temp.push_back(nums[firstPointer]);
+//             firstPointer++;
+//         } else {
+//             temp.push_back(nums[secondPointer]);
+//             secondPointer++;
+//         };
+//     }
+
+//     while (firstPointer <= mid) {
+//         temp.push_back(nums[firstPointer]);
+//         firstPointer++;
+//     }
+
+//     while (secondPointer <= upper) {
+//         temp.push_back(nums[secondPointer]);
+//         secondPointer++;
+//     }
+
+//     int sum = 0;
+
+//     for (int i = lower; i <= upper; i++) {
+//         sum += temp[i - lower];
+//     }
+
+//     return sum;
+// }
+// int mergeSort(vector<int>& nums, int lower, int upper) {
+//     if (lower >= upper) return nums[lower];
+
+//     int mid = (lower + upper) / 2;
+//     int leftSum = mergeSort(nums, lower, mid);
+//     int rightSum = mergeSort(nums, mid + 1, upper);
+//     int mergeSum = merge(nums, lower, upper);
+
+//     return mergeSum;
+// }
+// int countRangeSum(vector<int>& nums, int lower, int upper) {
+//     return mergeSort(nums, lower, upper);
+// }
+
 int main() {
     // int x;
     // cin >> x;
@@ -729,12 +809,17 @@ int main() {
     vector<int> array1 = {11, 7, 3, 6, 9, 1, 5, 10, 2, 4, 8};
     // vector<int> array1 = {0};
     // vector<int> result = selection_sort(array1);
-    // vector<int> result = bubble_sort(arr);
+    // vector<int> result = bubble_sort(array1);
     // vector<int> result = insertion_sort(array1);
     // merge_sort(array1, 0, array1.size() - 1);
-    quick_sort(array1, 0, array1.size() - 1);
-    vector<int> result = array1;
+    // quick_sort(array1, 0, array1.size() - 1);
+    // vector<int> result = array1;
+    
+    // vector<int> array2 = {-2, 5, -1};
+    // int result = countRangeSum(array2, -2, 2);
 
+    // recursive_bubble_sort(array1, array1.size());
+    recursive_insertion_sort(array1, array1.size());
     for (int n : array1) {
         cout << n << " ";
     }
