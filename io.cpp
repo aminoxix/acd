@@ -754,6 +754,14 @@ void quick_sort(vector<int> &arr, int low, int high) {
 //     return mergeSort(nums, lower, upper);
 // }
 
+int dpFibonacci(int n, vector<int> &dp) {
+    if (n <= 1) return n;
+
+    if (dp[n] != -1) return dp[n];
+
+    return dp[n] = dpFibonacci(n - 1, dp) + dpFibonacci(n - 2, dp);
+}
+
 int main() {
     // int x;
     // cin >> x;
@@ -779,7 +787,7 @@ int main() {
     // binarySearch(arr, 11);
     // reverseNumber(n);
 
-    int n = 16;
+    // int n = 16;
     // int m = 30;
 
     // isArmstrongNumber(n);
@@ -815,15 +823,21 @@ int main() {
     // quick_sort(array1, 0, array1.size() - 1);
     // vector<int> result = array1;
     
-    // vector<int> array2 = {-2, 5, -1};
+    vector<int> array2 = {-2, 5, -1};
     // int result = countRangeSum(array2, -2, 2);
 
     // recursive_bubble_sort(array1, array1.size());
-    recursive_insertion_sort(array1, array1.size());
-    for (int n : array1) {
-        cout << n << " ";
-    }
-    // cout << "result: " << result << "\n";
+    // recursive_insertion_sort(array1, array1.size());
+    // for (int n : array1) {
+    //     cout << n << " ";
+    // }
+
+    int n;
+    cin >> n;
+    vector<int> dp(n + 2, -1);
+
+    int result = dpFibonacci(n, dp);
+    cout << "result: " << result << "\n";
 
     return 0;
 }
