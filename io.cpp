@@ -754,12 +754,39 @@ void quick_sort(vector<int> &arr, int low, int high) {
 //     return mergeSort(nums, lower, upper);
 // }
 
+// // memoization - top down
+// int dpFibonacci(int n, vector<int> &dp) {
+//     if (n <= 1) return n;
+
+//     if (dp[n] != -1) return dp[n];
+
+//     return dp[n] = dpFibonacci(n - 1, dp) + dpFibonacci(n - 2, dp);
+// }
+
+// tabulation - bottom up
 int dpFibonacci(int n, vector<int> &dp) {
     if (n <= 1) return n;
+    dp[0] = 0;
+    dp[1] = 1;
 
-    if (dp[n] != -1) return dp[n];
+    for (int i = 2; i <= n; i++) {
+        dp[i] = dp[i - 1] + dp[i - 2];
+    }
 
-    return dp[n] = dpFibonacci(n - 1, dp) + dpFibonacci(n - 2, dp);
+    return dp[n];
+}
+
+int dpFibonacci(int n) {
+    if (n <= 1) return n;
+
+    int curr, prev1 = 1, prev2 = 0;
+    for (int i = 2; i <= n; i++) {
+        curr = prev1 + prev2;
+        prev2 = prev1;
+        prev1 = curr;
+    }
+
+    return curr;
 }
 
 int main() {
@@ -834,9 +861,14 @@ int main() {
 
     int n;
     cin >> n;
-    vector<int> dp(n + 2, -1);
+    // vector<int> dp(n + 2, -1);
+    // int result = dpFibonacci(n, dp);
 
+    vector<int> dp(n + 1);
     int result = dpFibonacci(n, dp);
+
+    // int result = dpFibonacci(n);
+
     cout << "result: " << result << "\n";
 
     return 0;
