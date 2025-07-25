@@ -831,6 +831,30 @@ int longestConsecutive(vector<int>& nums) {
     return longest;
 }
 
+vector<int> topKFrequent(vector<int>& nums, int k) {
+    unordered_map<int, int> freq;
+
+    // Step 1: Count frequencies
+    for (int num : nums) {
+        freq[num]++;
+    }
+
+    // Step 2: Use set (sorted by frequency descending)
+    set<pair<int, int>, greater<>> sortedSet;
+    for (auto& [num, count] : freq) {
+        sortedSet.insert({count, num});  // (frequency, number)
+    }
+
+    // Step 3: Collect top-k frequent elements
+    vector<int> result;
+    for (auto& [count, num] : sortedSet) {
+        if (result.size() == k) break;
+        result.push_back(num);
+    }
+
+    return result;
+}
+
 int main() {
     // int x;
     // cin >> x;
@@ -909,13 +933,17 @@ int main() {
     // int result = dpFibonacci(n);
 
     vector<int> array1 = {0, 3, 2, 5, 4, 6, 1, 1};
-    vector<int> array2 = {2,20,4,10,3,4,5};
-    int result = longestConsecutive(array1);
+    vector<int> array2 = {2, 20, 4, 10, 3, 4, 5};
+    vector<int> array3 = {1, 2, 2, 3, 3, 3};
+    vector<int> array4 = {1, 2};
+    // int result = longestConsecutive(array1);
     
-    cout << "result: " << result << "\n";
-    // for (int n : result) {
-    //     cout << n << " ";
-    // }
+    vector<int> result = topKFrequent(array4, 2);
+    
+    // cout << "result: " << result << "\n";
+    for (int n : result) {
+        cout << n << " ";
+    }
 
     return 0;
 }

@@ -46,6 +46,7 @@
     "compilerPath": "/usr/bin/g++",
     "chrono": "cpp",
     "functional": "cpp",
-    "valarray": "cpp"
+    "valarray": "cpp",
+    "__config": "cpp"
   }
 }
