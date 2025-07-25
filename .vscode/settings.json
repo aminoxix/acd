@@ -45,6 +45,7 @@
     "vector": "cpp",
     "compilerPath": "/usr/bin/g++",
     "chrono": "cpp",
-    "functional": "cpp"
+    "functional": "cpp",
+    "valarray": "cpp"
   }
 }

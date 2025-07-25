@@ -789,6 +789,48 @@ int dpFibonacci(int n) {
     return curr;
 }
 
+// int longestConsecutive(vector<int>& nums) {
+//     if (nums.empty()) return 0;
+//     sort(nums.begin(), nums.end());
+    
+//     int maxLen = 0, currLen = 1;
+
+//     for (int i = 0; i < nums.size() - 1; i++) {
+//         // compare index (i + 1) & (i) + 1 value
+//         if (nums[i + 1] == nums[i] + 1) {
+//             currLen++;
+//         } else if (nums[i] != nums[i + 1]) { // compare duplicates, if so continue
+//             maxLen = max(maxLen, currLen);
+//             currLen = 1;
+//         }
+//     }
+
+//     return max(maxLen, currLen);
+// }
+
+// optimal using unordered_set
+int longestConsecutive(vector<int>& nums) {
+    if (nums.empty()) return 0;
+    int longest = 1;
+    unordered_set<int> st;
+    for (int num : nums) {
+        st.insert(num);
+    }
+
+    for (auto it : st) {
+        if (st.find(it - 1) == st.end()) { // not found
+            int count = 1;
+            int x = it;
+            while (st.find(x + 1) != st.end()) { // if found
+                x += 1;
+                count += 1;
+            }
+            longest = max(longest, count);
+        }
+    }
+    return longest;
+}
+
 int main() {
     // int x;
     // cin >> x;
@@ -810,7 +852,7 @@ int main() {
     // int numbers = countDigits(12347678);
     // cout << "number of numbers: " << numbers;
 
-    vector<int> arr = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+    // vector<int> arr = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
     // binarySearch(arr, 11);
     // reverseNumber(n);
 
@@ -832,7 +874,7 @@ int main() {
     // auto result = recursionReverseArray(arr);
     // bool result = isPalindrome("abcba", 0);
 
-    vector<int> array = { 1, 4, 13, 8 };
+    // vector<int> array = { 1, 4, 13, 8 };
     // vector<int> array = { 3, 9, 6 };
     // vector<int> array = { 1, 2, 4 };
     // int result = maxFrequency(array, 5);
@@ -841,7 +883,7 @@ int main() {
     
     // int result = lengthOfLongestSubstring("abcabcbb");
     
-    vector<int> array1 = {11, 7, 3, 6, 9, 1, 5, 10, 2, 4, 8};
+    // vector<int> array1 = {11, 7, 3, 6, 9, 1, 5, 10, 2, 4, 8};
     // vector<int> array1 = {0};
     // vector<int> result = selection_sort(array1);
     // vector<int> result = bubble_sort(array1);
@@ -850,26 +892,30 @@ int main() {
     // quick_sort(array1, 0, array1.size() - 1);
     // vector<int> result = array1;
     
-    vector<int> array2 = {-2, 5, -1};
+    // vector<int> array2 = {-2, 5, -1};
     // int result = countRangeSum(array2, -2, 2);
 
     // recursive_bubble_sort(array1, array1.size());
     // recursive_insertion_sort(array1, array1.size());
-    // for (int n : array1) {
-    //     cout << n << " ";
-    // }
-
-    int n;
-    cin >> n;
+    
+    // int n;
+    // cin >> n;
     // vector<int> dp(n + 2, -1);
     // int result = dpFibonacci(n, dp);
-
-    vector<int> dp(n + 1);
-    int result = dpFibonacci(n, dp);
-
+    
+    // vector<int> dp(n + 1);
+    // int result = dpFibonacci(n, dp);
+    
     // int result = dpFibonacci(n);
 
+    vector<int> array1 = {0, 3, 2, 5, 4, 6, 1, 1};
+    vector<int> array2 = {2,20,4,10,3,4,5};
+    int result = longestConsecutive(array1);
+    
     cout << "result: " << result << "\n";
+    // for (int n : result) {
+    //     cout << n << " ";
+    // }
 
     return 0;
 }
