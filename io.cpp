@@ -855,6 +855,20 @@ vector<int> topKFrequent(vector<int>& nums, int k) {
     return result;
 }
 
+int maxArea(vector<int>& heights) {
+    // brute force
+    int largest = 0;
+    for (int i = 0; i < heights.size(); i++) {
+        for (int j = i + 1; j < heights.size(); j++) {
+            int height = min(heights[i], heights[j]);
+            int width = j - i;
+            int area = height * width;
+            largest = max(area, largest);
+        }
+    }
+    return largest;
+}
+
 int main() {
     // int x;
     // cin >> x;
@@ -938,12 +952,15 @@ int main() {
     vector<int> array4 = {1, 2};
     // int result = longestConsecutive(array1);
     
-    vector<int> result = topKFrequent(array4, 2);
+    // vector<int> result = topKFrequent(array4, 2);
     
-    // cout << "result: " << result << "\n";
-    for (int n : result) {
-        cout << n << " ";
-    }
+    vector<int> array5 = {1, 7, 2, 5, 4, 7, 3, 6};
+    int result = maxArea(array5);
+
+    cout << "result: " << result << "\n";
+    // for (int n : result) {
+    //     cout << n << " ";
+    // }
 
     return 0;
 }
