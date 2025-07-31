@@ -855,17 +855,28 @@ vector<int> topKFrequent(vector<int>& nums, int k) {
     return result;
 }
 
+// containers with water / rainwater
 int maxArea(vector<int>& heights) {
-    // brute force
+    // // brute force
+    // int largest = 0;
+    // for (int i = 0; i < heights.size(); i++) {
+    //     for (int j = i + 1; j < heights.size(); j++) {
+    //         int height = min(heights[i], heights[j]);
+    //         int width = j - i;
+    //         int area = height * width;
+    //         largest = max(area, largest);
+    //     }
+    // }
+    // return largest;
+
     int largest = 0;
-    for (int i = 0; i < heights.size(); i++) {
-        for (int j = i + 1; j < heights.size(); j++) {
-            int height = min(heights[i], heights[j]);
-            int width = j - i;
-            int area = height * width;
-            largest = max(area, largest);
-        }
+    int left = 0, right = heights.size() - 1;
+    
+    while (left < right) {
+        largest = max(largest, min(heights[left], heights[right]) * (right - left));
+        if (heights[left] < heights[right]) left++; else right--;
     }
+
     return largest;
 }
 
